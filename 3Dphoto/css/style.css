@@ -1,0 +1,26 @@
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+body{line-height:1}
+ol,ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
+table{border-collapse:collapse;border-spacing:0}
+*{tap-highlight-color:transparent;-webkit-tap-highlight-color:transparent;-ms-tap-highlight-color:transparent;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box}
+body{font-family:"Tahoma";background:#fff}
+input,textarea{outline:0;resize:none;font-size:14px}
+body,html{height:100%;font-size:12px;min-width:1230px}
+.fl{float:left;display:inline}
+.fr{float:right;display:inline}
+.clear{clear:both}
+img{border:0}
+.none{display: none;}
+.clearfix:after{content:".";display:block;clear:both;visibility:hidden;font-size:0;line-height:0;height:0}
+*{margin:0;padding:0}
+a{text-decoration:none;color:#757575}
+input.disabled,input.text,textarea,textarea.disabled{background-color:#FFF;border:1px solid #f9f9f9}
+textarea{padding:10px}
+.center{width: 1230px; margin:0 auto;}
+.img-box{margin:100px auto;width: 120px;height: 180px; position: relative;/*perspective: 800px;*/transform-style: preserve-3d;transform:perspective(800px) rotateX(-20deg);}
+.img-box img{width: 100%;height: 100%; position: absolute;
+	left: 0;top: 0;box-shadow: 0 0 5px #fff;border-radius:10px;-webkit-box-reflect: below 10px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent) , to(rgba(250, 250, 250, 0.5)));  }
+.img-box p{width: 1200px; height: 1200px; position: absolute;top:100%;left: 50%;margin-top: -595px;margin-left: -600px;
+background: -webkit-linear-gradient(center center rgba(255,225,225,0),rgba(225,70,45,.5));transform: rotateX(90deg);}

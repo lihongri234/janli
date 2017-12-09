@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>3d立方体旋转</title>
+	<link rel='stylesheet' type='text/css' href='css/style.css'>
+	<style type='text/css' id='css'></style>
+</head>
+<body>
+	<div id='banner'>
+		<ul id='ul'>
+			<!-- <li><div></div><div></div><div></div><div></div></li>
+			<li><div></div><div></div><div></div><div></div></li>
+			<li><div></div><div></div><div></div><div></div></li>
+			<li><div></div><div></div><div></div><div></div></li> -->
+		</ul>
+		<ol id='ol'><!-- <li>1</li><li>2</li><li>3</li><li>4</li> --></ol>
+	</div>
+	<script type='text/javascript'>
+		window.onload=function(){
+			var Css=document.getElementById('css');
+			var ol=document.getElementById('ol');
+			var oli=ol.getElementsByTagName('li');
+			var Css=document.getElementById('css');
+			var ul=document.getElementById('ul');
+			var uHTML='', pHTML='', zHTML='', z=0, tHTML='',ico="",ik=0;
+
+			function init(len){
+				var width=800 / len;
+				var w='#banner ul li{width:'+width+'px;}'
+				for (var i = 0; i < len; i++) {
+					if (i > len/2) {
+						z--;
+						zHTML += '#banner ul li:nth-child('+(i+1)+'){z-index:'+z+';}'
+					}
+					pHTML += '#banner ul li:nth-child('+(i+1)+') div{background-position:'+(-i*width)+'px;}'
+					tHTML += '#banner ul li:nth-child('+(i+1)+'){transition: 1s '+ .5*i/(len-1)+'s;}'
+					uHTML += '<li><div></div><div></div><div></div><div></div></li>'
+				}
+				
+				ico='<li>1</li><li>2</li><li>3</li><li>4</li>';
+				Css.innerHTML += tHTML+pHTML+zHTML+w;
+				ul.innerHTML = uHTML;
+				ol.innerHTML = ico;
+			}
+
+			function check(){
+				for (var i = 0; i < oli.length; i++) {
+						oli[i].index=i;
+						oli[i].onclick=function(e) {
+							e.preventDefault();
+							clearInterval(time)
+							// alert(this.index);
+							Css.innerHTML+='#banner ul li{transform:translateZ(-180px) rotateX('+this.index*90+'deg)} #banner ul li div:nth-child('+(this.index)+'){background:'+Color()+'}'
+							// alert(Color())
+						};
+					}
+			}
+			// 定时器
+			var time=setInterval(function(){
+				Css.innerHTML += '#banner ul li{transform:translateZ(-180px) rotateX('+ik*90+'deg)} #banner ul li div:nth-child('+(ik)+'){background:'+Color()+'}';
+				ik++
+				ik=ik>4?ik=0:ik;
+						
+			},3000)
+
+			// 随机颜色
+			var Color=function(){
+				return '#'+('0000'+(Math.random()*0xffffff)).toString(16).slice(-6);
+			}
+
+			init(200);
+			check();
+		}
+	</script>
+
+</body>
+</html>

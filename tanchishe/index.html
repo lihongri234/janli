@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>贪吃蛇游戏</title>
+<link rel="stylesheet"  href="css/one.css">
+</head>
+<body>
+<h1>贪吃蛇游戏</h1>
+<h2>游戏说明:空格键暂停 回车键开始</h2>
+<div align=center>
+  <div class="info"> 分数:<span id="scoreSpan" ></span>&nbsp
+    速度:<span id="speedSpan" ></span>&nbsp
+    X坐标:<span id="X" ></span>&nbsp
+    Y坐标:<span id="Y" ></span> </div>
+  <div class="in">
+    <spen id="in"></spen>
+  </div>
+  <canvas id="myCanvas" width="450" height="450" style="border:1px solid #00ffff;background:#3B4684"></canvas>
+  <div align="center">
+  <button type="button" id="but-1" onclick="move()">开&nbsp&nbsp始</button>
+  <button type="button" id="but-2" onclick="stop()">暂&nbsp&nbsp停</button>
+  <button type="button" id="but-3" onclick="st()">静&nbsp&nbsp音</button>
+  </div>
+</div>
+<!--存放音乐文件-->
+<center>
+  <audio src="mp3/1.mp3" id="start" loop ></audio>
+  <audio src="mp3/sx.mp3" id="bg" >
+  <audio src="mp3/hao.wav" id="death"></audio>
+  <audio src="mp3/boli.mp3" id="break"></audio>
+  <audio src="mp3/xe.mp3" id="xe"></audio>
+  <audio src="mp3/sx.wav" id="sx"></audio>
+</center>
+<script type="text/javascript">
+		//获取绘图的环境
+		var canvas = document.getElementById("myCanvas");//创建一个绘画图层
+		var cxt = canvas.getContext("2d");//定义绘画方式
+		var width=15; //定义格子长度
+		var flag = false;//定义一个假设
+		var score = 0; //初始化分数
+		var speed = 500;//初始化速度
+		var box_length=30;//格子的长度
+		var snake = [];//蛇 数组
+		var length = 15;//定义一个蛇的身体初始长度	
+		var k=0;//吃到食物的数量;
+		var colors=["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"];
+			
+		//f 上2 下-2 左1 右-1
+		//x 代表的是横向坐标  y代表纵向坐标  f代表移动的方向  定义一个坐标函数对象//代表蛇的身体节点
+		function Cell(x,y,f){
+			this.x = x;
+			this.y = y;
+			this.f = f;
+		}
+		//定义食物对象
+		function Food(x,y){
+			this.x = x;
+			this.y = y;
+		}
+		var x=Math.ceil(Math.random()*25)+1;
+		var y=Math.ceil(Math.random()*25)+2;
+		
+		document.getElementById("X").innerHTML=x;
+		document.getElementById("Y").innerHTML=y;
+		document.getElementById("scoreSpan").innerHTML=0;
+		document.getElementById("speedSpan").innerHTML=0;
+		document.getElementById("in").innerHTML="-------欢--迎--来--到--游--戏--世--界-------";
+		var food = new Food(x,y);
+		for(var i = 0 ;i < length ; i++){
+			snake[i] = new Cell(i,0,-2);
+		}
+		//画制蛇的身体
+		function drawSnake(){
+			cxt.clearRect(0,0,450,450);//清除画布
+			for(var i =  0 ; i < snake.length ;i++){
+				cxt.fillStyle = color();
+				if(i==snake.length-1){//判断蛇的头部颜色
+					cxt.fillStyle = "black";
+					// cxt.beginPath();
+					// cxt.arc(snake[i].x*width+8,snake[i].y*width,12,0,Math.PI*2); //Math.PI*2是JS计算方法，是圆
+					// cxt.closePath();
+					// cxt.fill();
+				}if (i<10) {cxt.fillStyle="green"};
+					cxt.beginPath();
+					cxt.rect(snake[i].x*width,snake[i].y*width,width,width);
+					cxt.closePath();
+					cxt.fill();
+			}
+			cutFood();
+
+		}
+		//画制食物
+		function drawFood(){
+			cxt.fillStyle = color();
+			cxt.beginPath();
+			cxt.rect(food.x*width,food.y*width,width,width);
+			cxt.closePath();
+			cxt.fill();
+		}
+		//移动蛇的方法
+		function moveSnake(direction){
+			if(!flag){
+				return false;
+			}
+			var newSnake = [];
+			var head = snake[snake.length-1];
+			var newCell = new Cell(head.x,head.y,head.f);
+			for(var i = 1;i<snake.length;i++){
+				newSnake[i-1] = snake[i];
+			
+			}
+			newSnake[snake.length-1] = newCell;
+			newCell.f  = direction;
+			switch(direction){
+				case 2:newCell.y--;break;//上
+				case 1:newCell.x--;break;//左
+				case -2:newCell.y++;break;//下
+				case -1:newCell.x++;break;//右
+			}
+			snake = newSnake;
+			if(checkDeath()){
+				drawSnake();
+			}
+		}
+		//蛇自动移动的方法
+		function moveClock(){
+			setTimeout("moveClock()",speed);
+			moveSnake(snake[snake.length-1].f);
+		}
+		//蛇运动时 分析情况
+		function checkDeath(){
+			var head = snake[snake.length-1];
+			
+			for(var i = 0 ;i< snake.length-1;i++){
+				//判断是不是咬了自己
+				if(head.x==snake[i].x && head.y==snake[i].y){
+					document.getElementById("xe").play();
+					document.getElementById("start").pause();
+					document.getElementById("in").innerHTML="你吃到了自己的身体！等待13秒后游戏重新开始。";
+					setTimeout("window.location.reload()",13000);
+					//window.location.reload();//页面重新加载
+					
+					flag = false;
+					return flag;
+				}
+				//判断是不是跨过了边界
+				if(head.x>=30||head.y>=30||head.x<0||head.y<0){
+					document.getElementById("sx").play();
+					document.getElementById("start").pause();
+					document.getElementById("in").innerHTML="你碰到墙面了！等待2秒后游戏重新开始。";
+					setTimeout("window.location.reload()",2000);
+				 	//window.location.reload();//页面重新加载
+	                                
+					flag = false;
+					return flag;
+				}
+			}
+			return true;
+		}
+		//如果吃到了食物
+		function cutFood(){
+			
+			var head = snake[snake.length-1];
+			if(head.x == food.x && head.y==food.y){
+				document.getElementById("bg").play();	
+				randomFood();//重新产生食物	
+		        k+=1;
+				score+=100;//每次吃到食物分数自动加100
+				
+				if(speed!=100) {speed-=50;};
+				if (score==2000) {speed==50};
+				document.getElementById("in").innerHTML ='你吃到【'+k+"】条蛇,得到了【"+ score+"】的高分";
+				document.getElementById("scoreSpan").innerHTML = score;
+				document.getElementById("speedSpan").innerHTML=Math.round(1000/speed*100)/100+"c/s";
+
+				var newCell = new Cell(head.x,head.y,head.f);
+				switch(newCell.f){
+					case 2:newCell.y--;break;//上
+					case 1:newCell.x--;break;//左
+					case -2:newCell.y++ ;break;//下
+					case -1:newCell.x++;break;//右
+				}
+				snake[snake.length] = newCell;
+
+			}
+			drawFood();
+		}
+		//产生随机的食物
+		function randomFood(){
+			var foodX = Math.ceil(Math.random()*25)+2;
+			var foodY = Math.ceil(Math.random()*25)+2;
+			//alert("X的坐标"+foodX);alert("Y的坐标"+foodY);
+			//判断产生的食物是否跟蛇的身体有冲突
+			for(var i = 0 ; i < snake.length;i++){
+				//蛇的节点中的坐标跟食物的坐标重叠
+				if(snake[i].x==foodX || snake[i].y==foodY ){
+					randomFood();
+				}
+			}
+			food = new Food(foodX,foodY);
+			document.getElementById("X").innerHTML=foodX;
+			document.getElementById("Y").innerHTML=foodY;
+		}
+		//监听键盘事件
+		function onkey(){ 
+			document.onkeydown = function(e){
+				 var code = e.keyCode;
+				 var direction;//方向
+				 //f 上2 下-2 左1 右-1
+				 switch(code){
+					case 37: direction=1;break;
+					case 38: direction=2;break;
+					case 39: direction=-1;break;
+					case 40: direction=-2;break;
+				 }
+				 //回车键移动
+				 if(code==13){move();}
+				 //空格键停止
+				 if(code==32){stop();}
+				 var head = snake[snake.length-1];//声明一个 蛇的头部
+				//判断 键盘输入的 上下左右键 进入移动函数
+				 if((head.f+direction)!=0&&code>=37&&code<=40){
+					moveSnake(direction);
+				 }
+			}
+		}
+		//创建一个随机颜色
+		function color(){
+			var col=colors[Math.ceil(Math.random()*colors.length+1)];
+			return col;
+		}
+		//自动移动 播放背景音乐
+		function move(){flag = true;document.getElementById("start").play();}
+		//自动停止 停止背景音乐
+		function stop(){flag = false;document.getElementById("start").pause();}
+		//静音模式停止背景音乐
+		function st(){
+				document.getElementById("start").pause();
+		}
+	drawSnake();
+	moveClock();
+	onkey();
+	 </script>
+</body>
+</html>

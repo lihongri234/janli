@@ -1,0 +1,38 @@
+*{margin:0;padding: 0;}
+li{list-style: none;}
+#banner{width: 800px; height: 360px; margin:100px auto;position: relative;perspective: 1000px;}
+#banner ul{width: 800px; height: 360px;}
+#banner ul li{width: 200px; height: 360px;float: left;position: relative;
+	transform-style: preserve-3d; transition: 1s;transform: translateZ(-180px)}
+#banner ul li:last-child{z-index: -1;}
+#banner ul li div{width: 100%; height: 100%;position: absolute;}
+
+#banner ul li div:nth-child(1){bottom: 360px;transform: translateZ(180px) rotateX(90deg);transform-origin: bottom;
+background: red;}
+#banner ul li div:nth-child(2){top: 360px;transform:translateZ(180px)  rotateX(-90deg);transform-origin: top;
+background: blue;}
+#banner ul li div:nth-child(3){transform:translateZ(180px) ;background: #059313;}
+#banner ul li div:nth-child(4){transform: translateZ(-180px) rotateX(180deg);
+background: gray;}
+/*#banner ul li div:nth-child(5){right: 200px;width: 360px;transform:translateZ(180px) rotateY(-90deg);
+	transform-origin: right;background: url(../img/3.png);}
+#banner ul li div:nth-child(6){left: 200px;width: 360px;transform:translateZ(180px) rotateY(90deg);
+	transform-origin: left;background: url(../img/4.png);}*/
+#banner ul li:nth-child(1) div{background-position: 0 0;}
+#banner ul li:nth-child(2) div{background-position: -200px 0;}
+#banner ul li:nth-child(3) div{background-position: -400px 0;}
+#banner ul li:nth-child(4) div{background-position: -600px 0;}
+
+#banner ul li:nth-child(1){transition: 1s .0s}
+#banner ul li:nth-child(2){transition: 1s .2s}
+#banner ul li:nth-child(3){transition: 1s .4s}
+#banner ul li:nth-child(4){transition: 1s .6s}
+
+/*#banner:hover ul li {transform:translateZ(-180px) rotateX(180deg);}*/
+
+#banner ol{width: 120px; height: 20px; position: absolute;left: 0px;bottom:10px; }
+#banner ol li{width: 20px; height: 100%; margin-left: 10px;border-radius: 10px; font-size: 16px; 
+	text-align: center;background: #000;color: #fff;box-shadow: 1px 1px 5px;float: left; cursor: pointer;}
+#banner ol li:hover{box-shadow:0px 0px 20px #fff;}
+
+#banner p{box-shadow:0px 0px 20px #fff; margin-top: 30px;}

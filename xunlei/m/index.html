@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>迅雷-全球领先的众筹云计算服务商</title>
+<meta name="keywords" content="深圳市迅雷网络技术有限公司、迅雷、迅雷网络、迅雷技术、下载、网速、加速、会员、云加速、云计算、CDN">
+<meta name="description" content="迅雷是中国领先的互联网众筹云计算服务商，也是中国第一大下载服务提供商和第二大互联网付费会员产品提供商。公司成立于2003年，以领先的云加速技术和系列产品为用户提供基于大容量娱乐数据传输的云计算服务，帮助用户在多终端上快速获得数字内容，从而推进大互联网时代的数据传输加速，让互联网信息传输像水、电一样方便、自由和接近免费。">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/main.css"></head>
+<body>
+<div class="index_sec">
+<header class="header">
+      <h1 class="logo png"><a href="http://www.xunlei.com/wap/" title="迅雷网络">迅雷网络</a></h1>
+      <a href="javascript:;" class="btn_more"><span class="ic_line"></span></a>
+      <div class="nav_list" style="display:none">
+        <nav>
+          <a href="/wap/product.html" class="btn_nav ic_more">产品中心</a>
+          <a href="/wap/news.html" class="btn_nav ic_product">新闻动态</a>
+          <a href="http://ir.xunlei.com">投资关系</a>
+          <a href="http://www.xunlei.com/?nojump=1">返回PC版</a>
+        </nav>
+        <a href="javascript:;" class="btn_close hide_txt">关闭</a>
+      </div>
+</header>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript">
+  $('a.btn_more').click(function(){
+      $('div.nav_list').show();
+      return false;
+  });
+  $('a.btn_close').click(function(){
+      $(this).closest('div.nav_list').hide();
+      return false;
+  })
+</script>
+
+    <div class="wrap">
+    	<div class="wrapper">
+        <div class="product_list" id="product_list">
+          <div class="product_box shoulei show">
+            <div class="content">
+              <h2 class="hide_txt">炽热追片之心，没有wifi也挡不住</h2>
+              <a href="http://mobile.xunlei.com/" class="btn_product">手机迅雷</a>
+            </div>
+          </div>
+          <div class="product_box xav">
+            <div class="content">
+              <h2 class="hide_txt">引爆风驰电掣的网速</h2>
+              <a href="http://k.xunlei.com/" class="btn_product">迅雷快鸟</a>
+            </div>
+          </div>
+          <div class="product_box member">
+            <div class="content">
+              <h2 class="hide_txt">快，让生活慢下来</h2>
+              <a href="http://act.vip.xunlei.com/vip/2015/super/" class="btn_product">迅雷会员</a>
+            </div>
+          </div>
+        </div>
+        <div class="product_btns">
+          <div class="btns_box" id="control_box">
+            <a href="http://mobile.xunlei.com/" class="btn_shoulei cur" title="手机迅雷"><span class="ic_shoulei hide_txt">手机迅雷</span></a>
+            <a href="http://k.xunlei.com/" class="btn_xav" title="迅雷快鸟"><span class="ic_xav hide_txt">迅雷快鸟</span></a>
+            <a href="http://act.vip.xunlei.com/vip/2015/super/" class="btn_member" title="迅雷会员"><span class="ic_member hide_txt">迅雷会员</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/slider.js"></script>
+  <script>
+    window.onload=function(){
+      var controls=document.getElementById("control_box").getElementsByTagName("a");
+      var pIdx=0;
+      var mysl=mySlider(
+        "product_list",        //父元素
+        {
+        child:        "product_box",   //每个子页的class
+        endClass:     "show",   //当前页的class
+        interval:     500,    //换页时间
+        stopTime:     200,    //换页停顿时间,一个数组或一个数字
+        direction:    0,      //1表示纵向，0表示横向，默认纵向
+        mode:         {
+                      //分别表示前一页、当前页、下一页的状态
+                      transform:["translate(-100%,0)","translate(0,0)","translate(100%,0)"],
+                      zIndex:[0,1,0]
+                       },
+        turn:           0,            //换页时是否前一页动画结束再到后一页动画开始，默认否
+        startCallback:  function(idx,pages){  //开始换页时触发的函数，提供两个参数idx和pages
+          controls[pIdx].className=controls[pIdx].className.replace("cur","").trim();
+          controls[idx].className=controls[idx].className+" cur";
+        },
+        callback_1:   function(){},     //刚换完页之后触发的函数，提供两个参数idx和pages
+        callback_2:   function(idx,pages){  //换完页之后可以换下一页时触发的函数，提供两个参数idx和pages
+          pIdx=idx;
+        }
+      });
+
+      var links=document.getElementsByTagName("a");
+      for(var i=0;i<links.length;i++){
+        links[i].addEventListener("touchstart",function(){}, false);
+      }
+    }
+  </script>
+  <script type="text/javascript">
+  var browser = {
+    versions: function() {
+    var u = navigator.userAgent, app = navigator.appVersion;
+    return {//移动终端浏览器版本信息
+    trident: u.indexOf('Trident') > -1, //IE内核
+    presto: u.indexOf('Presto') > -1, //opera内核
+    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+    iPad: u.indexOf('iPad') > -1, //是否iPad
+    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+    };
+    }(),
+    language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+// console.log(browser.versions)
+if (!(browser.versions.android || browser.versions.ios ||  browser.versions.webApp)||browser.versions.iPad) {
+    // alert('in')
+    window.location.href = '../index.html';
+  }
+
+</script>
+</body>
+</html>

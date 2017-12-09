@@ -1,0 +1,46 @@
+body {
+	background: #318E8B;
+}
+h1 {
+	text-align: center;
+	font-family: "楷体";
+	text-shadow: 5px 5px 10px #6600ff;
+	color: #fff;
+}
+h2 {
+	text-align: center;
+	font-family: "楷体";
+	text-shadow: 5px 5px 10px #ffff00;
+	color: #fff;
+}
+.info {
+	background: #6600ff;
+	width: 450px;
+	margin: 0px auto;
+	font: 20px "楷体";
+	color: yellow;
+	text-align: center;
+	border: 1px solid #33ff00;
+	text-shadow: 5px 5px 12px #6600ff;
+	color: #fff;
+}
+.in {
+	background: #000;
+	width: 450px;
+	height: 20px;
+	margin: 1px auto;
+	font: 20px "楷体";
+	color: yellow;
+	text-align: center;
+	border: 1px solid #33ff00;/*text-shadow:5px 5px 12px #6600ff;*/
+}
+#but-1 ,#but-2,#but-3{
+	width: 100px;
+	height: 50px;
+	margin: 10px 30px;
+	font: 18px "楷体";
+	line-height: 50px;
+	border-radius: 50% 50%;
+	border: 0px;
+}
+

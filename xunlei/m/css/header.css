@@ -1,0 +1,58 @@
+/***
+ @author ----- lihongri 
+ @time   ----- 2016-7-11
+***/
+
+.header{position: absolute;width: 100%;z-index: 99;top: 0;left: 0;height: 40px;}
+.header .logo{position: absolute;width: 65px;height: 30px;background: url('../img/logo.png') no-repeat; background-size: 100% 100%;top: 5px;left: 10px;text-indent: -9999px;}
+.header .logo a{display:block;height: 100%;}
+.header .btn_more{position: absolute;top: 13px;right: 10px;width: 16px;height: 13px;}
+.header .btn_more .ic_line{position: absolute;width: 100%;height: 1px;background: #fff;top: 6px;left: 0;}
+.header .btn_more:before,.header .btn_more:after{content: "";position: absolute;width: 100%;height: 1px;background: #fff;left: 0;}
+.header .btn_more:before{top: 0;}
+.header .btn_more:after{bottom: 0;}
+
+.header .nav_list{position: fixed;width: 100%;height: 100%;top: 0;left: 0;z-index: 5;background: rgba(0,0,0,0.8);}
+.header .nav_list:before{content: "";position: absolute;width: 65px;height: 30px;background: url('../img/logo.png') no-repeat; background-size: 100% 100%;top: 5px;left: 10px;}
+.header .nav_list nav{padding-top: 80px;}
+.header .nav_list nav a{display: block;height: 60px;line-height: 60px;text-align: center;font-size: 14px;color:#fff;border-top: 1px solid #666;}
+.header .nav_list nav a:last-child{border-bottom: 1px solid #666;}
+.header .nav_list .btn_close{position: absolute;right: 0;top: 4px;width: 32px;height: 32px;}
+.header .nav_list .btn_close:before,.header .nav_list .btn_close:after{content: "";position: absolute;width: 24px;height: 2px;top: 50%;left: 50%;margin: -1px 0 0 -12px;background: #fff;}
+.header .nav_list .btn_close:before{transform: rotate(45deg);}
+.header .nav_list .btn_close:after{transform: rotate(-45deg);}
+
+
+@media only screen and (min-width: 1080px){
+	.header{zoom:3.375;}
+}
+@media only screen and (min-width: 800px) and (max-width: 1079px) {
+	.header{zoom:2.5;}
+}
+@media only screen and (min-width: 768px) and (max-width: 799px) {
+	.header{zoom:2.4;}
+}
+@media only screen and (min-width: 720px) and (max-width: 767px) {
+	.header{zoom:2.25;}
+}
+@media only screen and (min-width: 640px) and (max-width: 719px) {
+	.header{zoom:2;}
+}
+@media only screen and (min-width: 540px) and (max-width: 639px) {
+	.header{zoom:1.68;}
+}
+@media only screen and (min-width: 480px) and (max-width: 539px) {
+	.header{zoom:1.5;}
+}
+@media only screen and (min-width: 414px) and (max-width: 479px) {
+	.header{zoom:1.29;}
+}
+@media only screen and (min-width: 400px) and (max-width: 413px) {
+	.header{zoom:1.25;}
+}
+@media only screen and (min-width: 375px) and (max-width: 399px) {
+	.header{zoom:1.17;}
+}
+@media only screen and (min-width: 360px) and (max-width:374px) {
+	.header{zoom:1.125;}
+}

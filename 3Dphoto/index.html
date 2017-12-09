@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>3D相册拖拽效果</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body style="background: #000;">
+	<div class="img-box">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<img src="img/1.jpg">
+		<p></p>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var img_l=$('.img-box img').size();
+			var deg=360/img_l,roX=-20,roY=0,xN,xY,play;
+			$('.img-box img').each(function(k) {
+				$(this).css('transform','rotateY('+k*deg+'deg) translateZ(350px)').attr('ondragstart','return false') 
+			});
+			$(document).mousedown(function(event) {
+				event.preventDefault();
+				var x_=event.clientX;
+				var y_=event.clientY;
+				$(this).bind('mousemove', function(event) {
+					var x=event.clientX;
+					var y=event.clientY;
+					xN=x-x_;
+					yN=y-y_;
+					roY += xN * 0.2;
+					roX -= yN * 0.1;
+					console.log(roY,roY)
+					
+					$('.img-box').css('transform','perspective(800px) rotateX('+roX+'deg)  rotateY('+roY+'deg)');
+
+					 $(document.body).append('<div style="width:5px;height:5px;border-radius:50%; background:'+Color()+';position:absolute;left:'+x+'px;top:'+y+'px; "></div>');
+				});
+			}).mouseup(function(){
+				$(this).unbind('mousemove');
+				play=setInterval(function(){
+					xN=xN*0.95
+					yN=yN*0.95
+					if (Math.abs(xN)<=0.5 && yN>=0.5) {clearInterval(play)}
+					roY += xN*0.2;
+					roX -= yN*0.1;
+					$('.img-box').css('transform','perspective(800px) rotateX('+roX+'deg)  rotateY('+roY+'deg)');
+				},30)
+			});
+			// 随机颜色
+			var Color=function(){
+				return '#'+('0000'+(Math.random()*0xffffff)).toString(16).slice(-6);
+			}
+
+		});
+	</script>
+
+</body>
+</html>
